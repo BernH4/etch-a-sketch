@@ -1,18 +1,34 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Etch-A-Sketch</title>
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <head>
+    <title>Etch-A-Sketch</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="title"> 
+      <h1 class="text-style">Etch-A-Sketch</h1>
+    </div>
 
-</head>
-<body>
-  <h1>
-    Etch-A-Sketch
-  </h1>
-  <div id="grid-container"></div>
-  
-</body>
-<script src="script.js"></script>
+    <div id="screen-center">
+      <div id="grid-and-sidepanel">
+        <div id="grid-container"></div>
+        <!-- I want this sidebar at the right side of the grid -->
+        <div id="side-bar">
+          <div data-col="#1abc9c" style="background-color: #1abc9c"></div><div data-col="#2ecc71" style="background-color: #2ecc71"></div><div data-col="#3498db" style="background-color: #3498db"></div><div data-col="#9b59b6" style="background-color: #9b59b6"></div><div data-col="#34495e" style="background-color: #34495e"><div data-col="#f1c40f" style="background-color: #f1c40f"></div><div data-col="#e67e22" style="background-color: #e67e22"></div><div data-col="#e74c3c" style="background-color: #e74c3c"></div><div data-col="#ecf0f1" style="background-color: #ecf0f1"></div><div data-col="#95a5a6" style="background-color: #95a5a6">
+        </div>
+        <!--  -->
+      </div>
+      <div id="bottom-controls">
+        <button class="text-style" id="btn-reset">Reset Grid</button>
+        <form action="#" id="form-grid-size">
+          <input id="input-grid-size" class="text-style" type="text" onfocus="this.value=''" placeholder="16x16 (Enter Grid-Size)">
+          <button class="text-style" id="btn-grid-size">APPLY</button>
+        </form>
+      </div>
+    </div>
+
+  </body>
+  <script src="script.js"></script>
 </html>

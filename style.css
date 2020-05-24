@@ -1,8 +1,79 @@
-#grid-container {
-    display: grid;
-    border: 2px solid black;
-    height: 500px;
-    width: 500px;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFC857;
 }
+#title {
+    display: flex;
+    justify-content: center;
+    padding-right: 25%
+}
+
+#screen-center {
+    margin: 0 auto;
+    height: 960px;
+    width: 1010px;
+}
+#grid-container {
+    background-color: white;
+    display: grid;
+    border: 5px solid black;
+    box-shadow: 1px 1px 8px #264653;
+    height: 960px;
+    width: 960px;
+    /* grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr); */
+}
+
+#bottom-controls {
+   margin: 20px;
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+/*#p-grid-size {
+    margin-left: auto;
+    margin-right: 10px;
+}*/
+
+/* #form-grid-size {
+    display: flex;
+    align-items: baseline;
+
+
+} */
+
+.text-style {
+    padding: 8px 24px;
+    background: #264653;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 8px #888;
+}
+
+#input-grid-size {
+    border-radius: 6px 0px 0px 6px;
+}
+#btn-grid-size {
+    margin-left: -5px;
+    margin-right: 50px;
+    border-radius: 0px 6px 6px 0px;
+}
+ /* #grid-and-sidebar {
+    display: flex; 
+}
+#side-bar {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: 960px;
+    background-color:white;
+} */
+ 
+ 

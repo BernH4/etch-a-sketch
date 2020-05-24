@@ -1,36 +1,68 @@
 
 const gridContainer = document.getElementById("grid-container");
+const btnReset = document.getElementById("btn-reset");
+const gridItems = gridContainer.getElementsByTagName('div');
+const inputGridSize = document.getElementById("input-grid-size");
 
-var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
-	'#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-	'#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-	'#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-	'#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-	'#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-	'#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-	'#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-	'#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-    '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
-];
+generateGrid(16,16);
 
-function generateGrid(){
-    for (let i = 1; i <= 16; i++) {  //ROWs
-        for (let j = 1; j <= 16; j++) {  //COLUMNS
+btnReset.addEventListener("click", function(e) {
+    resetGrid("colors");
+});
+
+inputGridSize.addEventListener("keydown", function(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        sizes = e.target.value.split("x");
+        if (sizes[0] > 0 && sizes[0] < 500 && sizes[1] > 0 && sizes[1] < 500) {
+            resetGrid("complete");
+            generateGrid(sizes[0],sizes[1]);
+            //e.target.value = "";
+            e.target.placeholder = "16x16 (Enter Grid-Size)" 
+        }
+        else {
+            e.target.value = "";
+            e.target.placeholder = "Unknown format. e.g. 16x16"
+            
+        }
+    }
+})
+
+
+
+
+
+
+function generateGrid(rows, columns){
+    let divcounter = 0;
+    gridContainer.style.gridTemplateRows = `repeat${rows}, 1fr)`;
+    gridContainer.style.gridTemplateColumns = `repeat${columns}, 1fr)`;
+    for (let i = 1; i <= rows; i++) {  //ROWs
+        for (let j = 1; j <= columns; j++) {  //COLUMNS
            newDiv = document.createElement("div");
            newDiv.style.gridRow = i
            newDiv.style.gridColumn = j
-           newDiv.style.backgroundColor = colorArray[i+j];
            newDiv.addEventListener('mouseover', testFunction);
            gridContainer.appendChild(newDiv);
+           divcounter++;
         }
     }
+    console.log(divcounter)
 }
 
+function resetGrid(operation) {
+
+    Array.from(gridItems).forEach((el) => {
+        if (operation == "colors") {
+            el.style.backgroundColor = "";
+        }
+        else if (operation == "complete") {
+            el.remove();
+        }
+    });
+} 
+
 function testFunction(e) {
-    console.log(e.target);
     e.target.style.backgroundColor = "lightblue";
 }
 
-
-
-generateGrid();
