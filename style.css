@@ -47,8 +47,9 @@ body {
 }
 
 #input-grid-size {
+    margin-left: auto;
+    width: 425px;
     border-radius: 6px 0px 0px 6px;
-    width: 420px;
 }
 
 #btn-grid-size {

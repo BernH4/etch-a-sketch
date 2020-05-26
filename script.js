@@ -41,14 +41,14 @@ document.addEventListener('mouseup', () => {
 
 function handleSizeInput(e) {
     sizes = inputGridSize.value.split("x");
-    if (sizes[0] > 0 && sizes[0] < 500 && sizes[1] > 0 && sizes[1] < 500) {
+    if (sizes[0] > 0 && sizes[0] < 129 && sizes[1] > 0 && sizes[1] < 129) {
         resetGrid("complete");
         generateGrid(sizes[0],sizes[1]);
         inputGridSize.placeholder = "16x16 (Enter Grid-Size)";
     }
     else {
         inputGridSize.value = "";
-        inputGridSize.placeholder = "Unknown format. e.g. 16x16";
+        inputGridSize.placeholder = "Format: 16x16 max 128x128";
             
     }
 
