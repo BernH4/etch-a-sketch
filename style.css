@@ -27,7 +27,6 @@ body {
     /* grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr); */
 }
-
 #bottom-controls {
    margin: 20px;
    display: flex;

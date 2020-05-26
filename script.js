@@ -5,17 +5,16 @@ const gridItems = gridContainer.getElementsByTagName('div');
 const inputGridSize = document.getElementById("input-grid-size");
 const tools = document.querySelectorAll('#side-bar *');
 
+//Initial Values
 generateGrid(16,16);
+let mode = currentColor = "hsl(040, 100%, 067%)";
 
-let currentColor = "hsl(040, 100%, 067%)";
-let mode = "hsl(040, 100%, 067%)";
 tools.forEach((tool) => {
     tool.addEventListener('click', (e) => {
         mode = e.target.getAttribute("data-tool");
         console.log(mode)
     });
 });
-
 
 btnReset.addEventListener("click", function(e) {
     resetGrid("colors");
@@ -50,6 +49,7 @@ function generateGrid(rows, columns){
            newDiv.style.gridColumn = j
            newDiv.style.backgroundColor = "hsl(040, 100%, 100%)";
            newDiv.setAttribute("color", "hsl(040, 100%, 100%)");
+           newDiv.setAttribute("draggable", "false");
            newDiv.addEventListener('mouseover', draw);
            gridContainer.appendChild(newDiv);
            divcounter++;
@@ -69,8 +69,17 @@ function resetGrid(operation) {
         }
     });
 } 
+let mouseDown = false
+document.addEventListener('mousedown', () => {
+    mouseDown = true
+})
+
+document.addEventListener('mouseup', () => {
+    mouseDown = false
+})
 
 function draw(e) {
+    if (mouseDown == false) return;
     if (mode == "rainbow") {
         currentColor = getRandomColor();
     }
@@ -129,7 +138,7 @@ function draw(e) {
 }
 
 function getRandomColor() {
-    //It wont work with a value under 100 because of the array syntax i use in func lighten and darken
+    //It wont work with a value below 100 because of the array syntax i use in func lighten and darken
     let h = randomVal(100,360);
     let s = randomVal(30, 95);
     let l = randomVal(30, 80);
