@@ -3,6 +3,7 @@ const gridContainer = document.getElementById("grid-container");
 const btnReset = document.getElementById("btn-reset");
 const gridItems = gridContainer.getElementsByTagName('div');
 const inputGridSize = document.getElementById("input-grid-size");
+const btnGridSize = document.getElementById("btn-grid-size");
 const tools = document.querySelectorAll('#side-bar *');
 
 //Initial Values
@@ -20,26 +21,40 @@ btnReset.addEventListener("click", function(e) {
     resetGrid("colors");
 });
 
+btnGridSize.addEventListener("click", handleSizeInput);
+
 inputGridSize.addEventListener("keydown", function(e) {
     if (e.keyCode === 13) {
         e.preventDefault();
-        sizes = e.target.value.split("x");
-        if (sizes[0] > 0 && sizes[0] < 500 && sizes[1] > 0 && sizes[1] < 500) {
-            resetGrid("complete");
-            generateGrid(sizes[0],sizes[1]);
-            //e.target.value = "";
-            e.target.placeholder = "16x16 (Enter Grid-Size)" 
-        }
-        else {
-            e.target.value = "";
-            e.target.placeholder = "Unknown format. e.g. 16x16"
-            
-        }
+        handleSizeInput();
     }
 })
 
+let mouseDown = false
+document.addEventListener('mousedown', () => {
+    mouseDown = true
+})
+
+document.addEventListener('mouseup', () => {
+    mouseDown = false
+})
+
+function handleSizeInput(e) {
+    sizes = inputGridSize.value.split("x");
+    if (sizes[0] > 0 && sizes[0] < 500 && sizes[1] > 0 && sizes[1] < 500) {
+        resetGrid("complete");
+        generateGrid(sizes[0],sizes[1]);
+        inputGridSize.placeholder = "16x16 (Enter Grid-Size)";
+    }
+    else {
+        inputGridSize.value = "";
+        inputGridSize.placeholder = "Unknown format. e.g. 16x16";
+            
+    }
+
+}
+
 function generateGrid(rows, columns){
-    let divcounter = 0;
     gridContainer.style.gridTemplateRows = `repeat${rows}, 1fr)`;
     gridContainer.style.gridTemplateColumns = `repeat${columns}, 1fr)`;
     for (let i = 1; i <= rows; i++) {  //ROWs
@@ -49,13 +64,10 @@ function generateGrid(rows, columns){
            newDiv.style.gridColumn = j
            newDiv.style.backgroundColor = "hsl(040, 100%, 100%)";
            newDiv.setAttribute("color", "hsl(040, 100%, 100%)");
-           newDiv.setAttribute("draggable", "false");
            newDiv.addEventListener('mouseover', draw);
            gridContainer.appendChild(newDiv);
-           divcounter++;
         }
     }
-    console.log(divcounter)
 }
 
 function resetGrid(operation) {
@@ -69,14 +81,6 @@ function resetGrid(operation) {
         }
     });
 } 
-let mouseDown = false
-document.addEventListener('mousedown', () => {
-    mouseDown = true
-})
-
-document.addEventListener('mouseup', () => {
-    mouseDown = false
-})
 
 function draw(e) {
     if (mouseDown == false) return;
